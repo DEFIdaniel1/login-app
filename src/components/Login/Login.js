@@ -13,9 +13,19 @@ const Login = (props) => {
 
   //reruns this code only when these elements change and "listen" for keystrokes to update form validity
   useEffect(() => {
-    setFormIsValid(
+    //adding timeout feature to limit requests sent
+    const serverRequest = setTimeout(() => { 
+      console.log("first one");
+      setFormIsValid(
       enteredEmail.includes("@") && enteredPassword.trim().length > 6
     );
+    }, 500);//500 milliseconds before "completing"
+
+    return () => { //this is the CLEANUP function
+      console.log(serverRequest);
+      clearTimeout(serverRequest);
+    }
+
   }, [setFormIsValid, enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
