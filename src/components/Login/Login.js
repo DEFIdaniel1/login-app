@@ -48,6 +48,10 @@ const Login = (props) => {
     };
   }, []);
 
+
+  //object destructuring used to reduce the number of changes sent to server
+  //this will only send if the isValid condition changes
+  //before emailState.isValid would send change EVERY time char changed
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
 
